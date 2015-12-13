@@ -39,9 +39,13 @@ def match_ends(words):
 # before combining them.
 def front_x(words):
     # +++your code here+++
-    x_list = [w for w in words if w[0] == 'x']
-    o_list = [w for w in words if w[0] != 'x']
-    return sorted(x_list) + sorted(o_list)
+    words_cp = words[:]
+    xlist = list()
+    for w in words_cp:
+        if w[0] == 'x':
+            xlist.append(w)
+            words_cp.remove(w)
+    return sorted(xlist) + sorted(words_cp)
 
 
 # C. sort_last
