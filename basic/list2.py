@@ -63,11 +63,10 @@ def reversed_linear_merge(list1, list2):
         else:
             result.append(list2.pop(-1))
 
-    # Now tack on what's left
+    # Now tack on what's on the left
     result.extend(reversed(list1))
     result.extend(reversed(list2))
-    result.sort()
-    return result
+    return list(reversed(result))
 
 
 # Simple provided test() function used in main() to print
