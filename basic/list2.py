@@ -26,7 +26,7 @@ def remove_adjacent(nums):
 # list of all the elements in sorted order. You may modify the passed in lists.
 # Ideally, the solution should work in "linear" time, making a single
 # pass of both lists.
-def linear_merge(list1, list2):
+def merge(list1, list2):
     # +++your code here+++
     result = []
     # Look at the two lists so long as both are non-empty.
@@ -52,7 +52,7 @@ def linear_merge(list1, list2):
 # solution works in linear time, but is more ugly.
 
 
-def reversed_linear_merge(list1, list2):
+def linear_merge(list1, list2):
     # +++your code here+++
     result = []
     # Look at the two lists so long as both are non-empty.
@@ -87,21 +87,21 @@ def main():
     test(remove_adjacent([]), [])
 
     print()
-    print('linear_merge')
+    print('merge')
+    test(merge(['aa', 'xx', 'zz'], ['bb', 'cc']),
+         ['aa', 'bb', 'cc', 'xx', 'zz'])
+    test(merge(['aa', 'xx'], ['bb', 'cc', 'zz']),
+         ['aa', 'bb', 'cc', 'xx', 'zz'])
+    test(merge(['aa', 'aa'], ['aa', 'bb', 'bb']),
+         ['aa', 'aa', 'aa', 'bb', 'bb'])
+
+    print()
+    print('reversed_linear_merge')
     test(linear_merge(['aa', 'xx', 'zz'], ['bb', 'cc']),
          ['aa', 'bb', 'cc', 'xx', 'zz'])
     test(linear_merge(['aa', 'xx'], ['bb', 'cc', 'zz']),
          ['aa', 'bb', 'cc', 'xx', 'zz'])
     test(linear_merge(['aa', 'aa'], ['aa', 'bb', 'bb']),
-         ['aa', 'aa', 'aa', 'bb', 'bb'])
-
-    print()
-    print('reversed_linear_merge')
-    test(reversed_linear_merge(['aa', 'xx', 'zz'], ['bb', 'cc']),
-         ['aa', 'bb', 'cc', 'xx', 'zz'])
-    test(reversed_linear_merge(['aa', 'xx'], ['bb', 'cc', 'zz']),
-         ['aa', 'bb', 'cc', 'xx', 'zz'])
-    test(reversed_linear_merge(['aa', 'aa'], ['aa', 'bb', 'bb']),
          ['aa', 'aa', 'aa', 'bb', 'bb'])
 
 
