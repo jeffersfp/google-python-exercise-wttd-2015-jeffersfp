@@ -53,6 +53,26 @@ def merge(list1, list2):
 
 
 def linear_merge(list1, list2):
+    result = []
+    i = j = 0
+    total = len(list1) + len(list2)
+    while len(result) != total:
+        if len(list1) == i:
+            result += list2[j:]
+            break
+        elif len(list2) == j:
+            result += list1[i:]
+            break
+        elif list1[i] < list2[j]:
+            result.append(list1[i])
+            i += 1
+        else:
+            result.append(list2[j])
+            j += 1
+    return result
+
+
+def linear_merge_with_reversed(list1, list2):
     # +++your code here+++
     result = []
     # Look at the two lists so long as both are non-empty.
@@ -96,12 +116,21 @@ def main():
          ['aa', 'aa', 'aa', 'bb', 'bb'])
 
     print()
-    print('reversed_linear_merge')
+    print('linear_merge')
     test(linear_merge(['aa', 'xx', 'zz'], ['bb', 'cc']),
          ['aa', 'bb', 'cc', 'xx', 'zz'])
     test(linear_merge(['aa', 'xx'], ['bb', 'cc', 'zz']),
          ['aa', 'bb', 'cc', 'xx', 'zz'])
     test(linear_merge(['aa', 'aa'], ['aa', 'bb', 'bb']),
+         ['aa', 'aa', 'aa', 'bb', 'bb'])
+
+    print()
+    print('linear_merge_with_reversed')
+    test(linear_merge_with_reversed(['aa', 'xx', 'zz'], ['bb', 'cc']),
+         ['aa', 'bb', 'cc', 'xx', 'zz'])
+    test(linear_merge_with_reversed(['aa', 'xx'], ['bb', 'cc', 'zz']),
+         ['aa', 'bb', 'cc', 'xx', 'zz'])
+    test(linear_merge_with_reversed(['aa', 'aa'], ['aa', 'bb', 'bb']),
          ['aa', 'aa', 'aa', 'bb', 'bb'])
 
 

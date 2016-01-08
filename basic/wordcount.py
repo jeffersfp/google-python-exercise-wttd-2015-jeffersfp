@@ -38,6 +38,7 @@ print_words() and print_top().
 """
 
 import sys
+import re
 
 
 # +++your code here+++
@@ -46,7 +47,74 @@ import sys
 # and builds and returns a word/count dict for it.
 # Then print_words() and print_top() can just call the utility function.
 
+def helper(filename):
+    """
+    Reads file and build dictionary with words and their quantities in k,v
+    :param filename: the file to be read
+    :return: a dict with word: quantity
+    """
+
+    # get words for file (splited by space)
+    words = [w for line in open(filename).readlines() for w in line.split()]
+
+    # remove pontuation and transform lowercase
+    for i in range(len(words)):
+        words[i] = re.sub(r'(_|\+|-|\.|,|\?|\!|@|#|\$|%|\^|&|\*|\(|\)|;|\\|\/|\||<|>|\"|\')', '', words[i])
+        words[i] = words[i].lower()
+
+    # cast to set to remove repeated words and sort by alphabetical order
+    words_set = set(words)
+
+    # build dictionary with word => quantity
+    words_dict = dict()
+    for w in words_set:
+        words_dict[w] = words.count(w)
+
+    # finally return the dict
+    return words_dict
+
+
+# 1. For the --count flag, implement a print_words(filename) function that counts
+# how often each word appears in the text and prints:
+# word1 count1
+# word2 count2
+# ...
+#
+# Print the above list in order sorted by word (python will sort punctuation to
+# come before letters -- that's fine). Store all the words as lowercase,
+# so 'The' and 'the' count as the same word.
+def print_words(filename):
+    # build dict through helper
+    words_dict = helper(filename)
+
+    # simply iterate and print values
+    for w,q in words_dict.items():
+        print(w, q)
+
+
+# 2. For the --topcount flag, implement a print_top(filename) which is similar
+# to print_words() but which prints just the top 20 most common words sorted
+# so the most common word is first, then the next most common, and so on.
+#
+# Use str.split() (no arguments) to split on all whitespace.
+def print_top(filename):
+    # build dict through helper
+    words_dict = helper(filename)
+
+    # builds a list containing tuples from the words and quantities respectively
+    wq_list = list()
+    for w,q in words_dict.items():
+        wq_list.append((w,q))
+
+    # sort the list by quantity (reversed to put most repeated words first)
+    wq_list.sort(reverse=True, key=lambda x: x[-1])
+
+    # simply print it
+    for w,q in wq_list[:20]:
+        print(w, q)
+
 ###
+
 
 # This basic command line argument parsing code is provided and
 # calls the print_words() and print_top() functions which you must define.

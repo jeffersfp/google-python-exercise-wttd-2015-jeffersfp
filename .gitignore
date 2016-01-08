@@ -1,3 +1,4 @@
 .idea
+.gpe
 *.pyc
 __pycache__

@@ -18,7 +18,10 @@
 # Return the resulting string.
 def verbing(s):
     # +++your code here+++
-    return
+    if len(s) >= 3:
+        return '{}ing'.format(s) if 'ing' not in s else '{}ly'.format(s)
+    else:
+        return s
 
 
 # E. not_bad
@@ -31,7 +34,12 @@ def verbing(s):
 # This dinner is good!
 def not_bad(s):
     # +++your code here+++
-    return
+    if 'not' in s and 'bad' in s and s.index('bad') > s.index('not'):
+        left_half = s[:s.index('not')]
+        right_half = s[s.index('bad')+3:]
+        return left_half + 'good' + right_half
+    else:
+        return s
 
 
 # F. front_back
