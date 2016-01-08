@@ -54,12 +54,14 @@ def helper(filename):
     :return: a dict with word: quantity
     """
 
-    # get words for file (splited by space)
+    # get words from file (split by space)
     words = [w for line in open(filename).readlines() for w in line.split()]
 
     # remove pontuation and transform lowercase
     for i in range(len(words)):
-        words[i] = re.sub(r'(_|\+|-|\.|,|\?|\!|@|#|\$|%|\^|&|\*|\(|\)|;|\\|\/|\||<|>|\"|\')', '', words[i])
+        words[i] = re.sub(
+            r'(`|_|\+|-|\.|,|\?|\!|@|#|\$|%|\^|&|\*|\(|\)|;|\\|\/|\||<|>|\"|\')',
+            '', words[i])
         words[i] = words[i].lower()
 
     # cast to set to remove repeated words and sort by alphabetical order
@@ -88,7 +90,7 @@ def print_words(filename):
     words_dict = helper(filename)
 
     # simply iterate and print values
-    for w,q in words_dict.items():
+    for w, q in words_dict.items():
         print(w, q)
 
 
@@ -103,15 +105,16 @@ def print_top(filename):
 
     # builds a list containing tuples from the words and quantities respectively
     wq_list = list()
-    for w,q in words_dict.items():
-        wq_list.append((w,q))
+    for w, q in words_dict.items():
+        wq_list.append((w, q))
 
     # sort the list by quantity (reversed to put most repeated words first)
     wq_list.sort(reverse=True, key=lambda x: x[-1])
 
     # simply print it
-    for w,q in wq_list[:20]:
+    for w, q in wq_list[:20]:
         print(w, q)
+
 
 ###
 
