@@ -15,9 +15,15 @@
 # modify the passed in list.
 def remove_adjacent(nums):
     # +++your code here+++
-    lista = []
-    for n in nums:
-        if len(lista) == 0 or n != lista[-1]:
+
+    # empty lists aren't valid input
+    if len(nums) == 0:
+        return []
+
+    # builds the list without adjacents
+    lista = [nums[0]]
+    for n in nums[1:]:
+        if n != lista[-1]:
             lista.append(n)
     return lista
 
@@ -104,6 +110,7 @@ def main():
     print('remove_adjacent')
     test(remove_adjacent([1, 2, 2, 3]), [1, 2, 3])
     test(remove_adjacent([2, 2, 3, 3, 3]), [2, 3])
+    test(remove_adjacent([1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 2, 2]), [1, 2, 3, 4, 2])
     test(remove_adjacent([]), [])
 
     print()
